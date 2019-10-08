@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Playlists / Make lists of links</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="apple-touch-icon-precomposed" href="https://theotime.me/logo.png" />
+	<link rel="shortcut icon" type="image/png" href="../favicon.png">
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="https://theotime.me/logo.png" />
+	<meta property="og:description" content="Hello! I'm Théotime, a front-end designer and a Javascript developer. I record me also for my podcast where I'm talking about design, web technologies, or developement." />
+	<meta name="description" content="Hello! I'm Théotime, a front-end designer and a Javascript developer. I record me also for my podcast where I'm talking about design, web technologies, or developement." />
+	<meta property="og:site_name" content="Théotime.me">
+	<meta property="og:title" content="Théotime - Designer / Front-end and Javascript developer">
+	<meta property="og:url" content="https://theotime.me" />
+	<meta name="theme-color" content="#33389c">
+</head>
+<body>
+
+	<!-- Navigation -->
+<div id="nav">
+
+</div>
+
+<div id="wrapper">
+	<div id="playlist">
+		<h4>Chargement ...</h4>
+		<div class="icons-general">
+			<svg xmlns="http://www.w3.org/2000/svg" width="40" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+		</div>
+
+		<div class="links"></div>
+	</div>
+	<div id="othersPlaylists" align="center">
+		<div class="links"></div>
+
+		<a class="addPlaylist"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/><path d="M0 0h24v24H0z" fill="none"/></svg><span>Ajouter une playlist</span></a>
+		<p class="noContent">Aucune autre playlist, vous pouvez en créer une avec le bouton ci-dessus.</p>
+	</div>
+</div>
+
+<div id="boxs" align="center">
+	<div id="addPlaylist">
+		<h4>Ajouter une playlist</h4>
+		<input type="text" placeholder="Nom de la playlist">
+	</div>
+</div>
+
+
+	<script src="https://pzm.herokuapp.com/$/ajax|get|cookies|scrolltop|title|getJSON"></script> <!-- Prizm -->
+	<script src="display.js"></script>
+	<script src="save.js"></script>
+	<script src="apis.js"></script>
+	<script src="algo.js"></script>
+	<script src="main.js"></script>
+	<script async src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js'></script>
+</body>
+</html>
