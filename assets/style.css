@@ -63,6 +63,15 @@
 	src: local('Roboto Mono'), local('RobotoMono-Regular'), url(https://fonts.gstatic.com/s/robotomono/v5/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2) format('woff2');
 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
+/* latin */
+@font-face {
+	font-family: 'Lexend Deca';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Lexend Deca Regular'), local('LexendDeca-Regular'), url(https://fonts.gstatic.com/s/lexenddeca/v1/K2F1fZFYk-dHSE0UPPuwQ5qnJy8.woff2) format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
   
 
 html, body, svg, h1, h2, h4, h5, h6, p, a, button, form, div {
@@ -80,7 +89,6 @@ html, body {
 	height: 100%;
 	z-index: -1;
 }
-
 
 #nav {
 	position: relative;
@@ -228,6 +236,7 @@ html, body {
 	width: 100%;
 	padding-top: 20px;
 	padding-bottom: 15px;
+	overflow-y: scroll;
 }
 
 #playlist {
@@ -326,7 +335,7 @@ html, body {
 }
 
 #playlist .links a:hover .text span {
-	color: #333;
+	opacity: .7;
 }
 
 #playlist .links a .text svg {
@@ -342,9 +351,16 @@ html, body {
 
 /* YOUTUBE */
 #playlist .links a.youtube:hover .text { border-bottom: 2px solid #e52d27; }
-#playlist .links a.youtube svg { fill: #e52d27; }
+#playlist .links a.youtube > svg { fill: #e52d27; }
 #playlist .links a.youtube:hover { color: #ff0000; }
 #playlist .links a.youtube:hover svg { fill: #ff0000; }
+
+/* DISCORD */
+#playlist .links a.discord:hover .text { border-bottom: 2px solid #7289DA; }
+#playlist .links a.discord svg { fill: #7289DA; }
+#playlist .links a.discord { color: #7289DA; }
+#playlist .links a.discord:hover { color: #99AAB5; }
+#playlist .links a.discord:hover svg { fill: #99AAB5; }
 
 /* STACKOVERFLOW */
 #playlist .links a.stackoverflow:hover .text { border-bottom: 2px solid #f48024; }
@@ -365,6 +381,45 @@ html, body {
 #playlist .links a.instagram { color: #9b293e; }
 #playlist .links a.instagram:hover { color: #c0344e; }
 #playlist .links a.instagram:hover svg { fill: #E4405F; }
+
+/* GDocs */
+#playlist .links a.gdocs-document:hover .text { border-bottom: 2px solid #1a73e8; }
+#playlist .links a.gdocs-document svg { fill: #1a73e8; }
+#playlist .links a.gdocs-document { color: #1a73e8; }
+#playlist .links a.gdocs-document:hover { color: #1760c0; }
+#playlist .links a.gdocs-document:hover svg { fill: #1760c0; }
+
+/* GDocs */
+#playlist .links a.gdocs-slide:hover .text { border-bottom: 2px solid #fbbc04; }
+#playlist .links a.gdocs-slide svg { fill: #e9b108; }
+#playlist .links a.gdocs-slide { color: #e9b108; }
+#playlist .links a.gdocs-slide:hover { color: #d1a00e; }
+#playlist .links a.gdocs-slide:hover svg { fill: #d1a00e; }
+
+/* GDocs */
+#playlist .links a.gdocs-sheet:hover .text { border-bottom: 2px solid #188038; }
+#playlist .links a.gdocs-sheet svg { fill: #188038; }
+#playlist .links a.gdocs-sheet { color: #188038; }
+#playlist .links a.gdocs-sheet:hover { color: #12612a; }
+#playlist .links a.gdocs-sheet:hover svg { fill: #12612a; }
+
+#playlist .links a:not(.search) .text span {
+	opacity: .5;
+}
+
+/* Gfonts */
+#playlist .links a.gfont:hover .text { border-bottom: 2px solid #ff5252; }
+#playlist .links a.gfont svg { fill: #ff5252; }
+#playlist .links a.gfont { color: #ff5252; }
+#playlist .links a.gfont:hover { color: #cf4040; }
+#playlist .links a.gfont:hover svg { fill: #cf4040; }
+
+/* Fraance Culture */
+#playlist .links a.franceculture:hover .text { border-bottom: 2px solid #802489; }
+#playlist .links a.franceculture svg { fill: #802489; }
+#playlist .links a.franceculture { color: #802489; }
+#playlist .links a.franceculture:hover { color: #802489; }
+#playlist .links a.franceculture:hover svg { fill: #802489; }
 
 /* SEARCH */
 #playlist .links a.search:hover .text { border-bottom: 2px solid #1388e7; }
@@ -525,6 +580,7 @@ html, body {
 }
 
 #playlist .quick iframe {
+	background-color: rgba(0, 0, 0, .2);
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -534,7 +590,7 @@ html, body {
 	border: 0px solid transparent;
 }
 
-#playlist .quick h3 {
+#playlist .quick.youtube h3 {
 	font-size: 25px;
 	width: 40%;
 	margin-right: 8%;
@@ -542,7 +598,7 @@ html, body {
 	float: right;
 }
 
-#playlist .quick h4 {
+#playlist .quick.youtube h4 {
 	font-size: 18px;
 	text-align: left;
 	float: right;
@@ -552,7 +608,7 @@ html, body {
 	color: #667;
 }
 
-#playlist .quick p {
+#playlist .quick.youtube p {
 	color: #383838;
 	width: 40%;
 	margin-top: -200px;
@@ -709,6 +765,82 @@ html, body {
 
 #playlist .quick.deezer .author:hover img {
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, .2);
+}
+
+#playlist .quick.xml .header {
+	float: left;
+}
+
+#playlist .quick.xml .header img {
+	width: 80px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, .15);
+	margin-bottom: 5px;
+	float: left;
+	margin-right: 20px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+}
+
+#playlist .quick.xml .header h4 {
+	font-family: "Lexend Deca", sans-serif;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	width: 300px;
+	float: none;
+}
+
+#playlist .quick.xml .header p {
+	display: block;
+}
+
+#playlist .quick.xml .latest {
+	background-color: rgba(0, 0, 0, .08);
+	padding: 20px 30px;
+	margin-right: 80px;
+	box-sizing: border-box;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	-ms-border-radius: 15px;
+	-o-border-radius: 15px;
+}
+
+#playlist .quick.xml .latest p {
+	font-family: "Roboto Mono", sans-serif;
+	font-size: 18px;
+	margin-bottom: 10px;
+	opacity: .8;
+}
+
+#playlist .quick.xml .latest p span {
+	opacity: .6;
+}
+
+#playlist .quick.xml .latest a {
+	font-family: "Roboto Condensed", sans-serif;
+	text-decoration: none;
+	padding: 0px;
+	margin: 0px;
+	font-size: 30px;
+}
+
+#playlist .quick.xml .latest a span {
+	font-size: 18px;
+	font-family: "Roboto Mono", sans-serif;
+	margin-top: 10px;
+	color: #0064bb;
+	display: block;
+}
+
+#playlist .quick.xml .latest a:hover {
+	color: #004b8d;
+}
+
+#playlist .quick.xml .latest a:hover span {
+	text-decoration: underline;
 }
 
 #playlist .links a .icons {

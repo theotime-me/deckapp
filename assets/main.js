@@ -47,6 +47,10 @@ function quick(i, ev) {
 	} else {
 		$(".quick"+i).addClass('visible');
 	}
+
+	if (document.querySelector(".quick"+i+" iframe") && !$(".quick"+i+" iframe").attr("src")) {
+		$(".quick"+i+" iframe").prop("src", $(".quick"+i+" iframe").data("src"));
+	}
 }
 
 function closeQuicks() {

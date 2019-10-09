@@ -12,6 +12,10 @@ function algo(url) {
 			path = path.substring(0, path.length - 1);
 		}
 
+	if (["fonts.google.com", "docs.google.com", "thetimes.co.uk"].includes(domain)) {
+		noSubdomain = domain;
+	}
+
 	switch(noSubdomain) {
 		case "ecosia.org": case "yahoo.com": case "duckduckgo.com": case "qwant.com": case "yandex.com":
 			let s1 = path.replace(/\?|&/g, "&SPLIT&"),
@@ -51,6 +55,21 @@ function algo(url) {
 			} else if (path.includes("/") && path.split("/")[1] != "") {
 				out.nature = "github-user";
 				out.user = path.split("/")[0];
+			}
+		break;
+
+		case "docs.google.com":
+			if (["document", "presentation", "spreadsheets"].includes(path.split("/")[0])) {
+				out.type = path.split("/")[0];
+				out.id = path.split("/")[2];
+				out.nature = "google-docs-file";
+			}
+		break;
+
+		case "fonts.google.com":
+			if (path.startsWith("specimen/")) {
+				out.nature = "google-font";
+				out.font = path.split("/")[1];
 			}
 		break;
 
@@ -238,6 +257,184 @@ function algo(url) {
 				out.id = path.split("/")[2];
 			}
 		break;
+
+		case "franceculture.fr":
+			if (path.split("/").length >= 3 && path.split("/")[0] == "emissions") {
+				let elements = path.split("/");
+
+				out.title = upCase(elements[2].replace(/-/g, " "))
+				out.emission = upCase(elements[1].replace(/-/g, " "))
+				out.nature = "franceculture-emission";
+			} else if (path.split("/").length == 2) {
+				let elements = path.split("/");
+
+				out.title = upCase(elements[1].replace(/-/g, " "));
+				out.category = upCase(elements[0].replace(/-/g, " "));
+				out.nature = "franceculture-actu";
+			}
+		break;
+
+		case "lemonde.fr":
+			if (path.split("/").length >= 6) {
+				let elements = path.split("/");
+
+				out.title = upCase(elements[5].split("_")[0].replace(/-/g, " "));
+				out.date = elements[4]+"/"+elements[3]+"/"+elements[2];
+				out.nature = "newspaper-article";
+				out.newspaper = "lemonde";
+				out.newspaperText = "Le Monde";
+			}
+		break;
+
+		case "nytimes.com":
+			if (path.split("/").length >= 6) {
+				let elements = path.split("/");
+
+				out.title = upCase(elements[5].split(".")[0].replace(/-/g, " "));
+				out.date = elements[2]+"/"+elements[1]+"/"+elements[0];
+				out.nature = "newspaper-article";
+				out.newspaper = "nytimes";
+				out.newspaperText = "The New York Times";
+			}
+		break;
+
+		case "thetimes.co.uk":
+			if (path.split("/").length >= 3) {
+				let elements = path.split("/"),
+					title = elements[2].split("-");
+
+				title.pop();
+
+				out.title = upCase(title.join(" "));
+				out.date = elements[4]+"/"+elements[3]+"/"+elements[2];
+				out.nature = "newspaper-article";
+				out.newspaper = "thetimes";
+				out.newspaperText = "The Times";
+			}
+		break;
+
+		case "huffingtonpost.fr":
+			if (path.split("/").length >= 2) {
+				let elements = path.split("/"),
+					title = elements[1].split("-");
+
+				title.shift();
+
+				out.title = upCase(title.join(" ").split("_")[0]);
+				out.nature = "newspaper-article";
+				out.newspaper = "huffpost";
+				out.newspaperText = "Le Huffpost";
+			}
+		break;
+
+		case "francetvinfo.fr": case "lexpress.fr":
+			if (path.split("/").length >= 2) {
+				let elements = path.split("/"),
+					title = elements[3].split("-");
+
+				out.title = upCase(title.join(" ").split("_")[0]);
+				out.nature = "newspaper-article";
+				out.newspaper = domain.split(".")[0];
+				out.newspaperText = out.newspaper == "francetvinfo" ? "France Info" : "L' Express";
+			}
+		break;
+
+		case "parismatch.com":
+			if (path.split("/").length >= 2) {
+				let elements = path.split("/"),
+					title = elements[2].split("-");
+
+				title.pop();
+
+				out.title = upCase(title.join(" "));
+				out.nature = "newspaper-article";
+				out.newspaper = "parismatch";
+				out.newspaperText = "Paris Match";
+			}
+		break;
+
+		case "lepoint.fr":
+			if (path.split("/").length >= 2) {
+				let elements = path.split("/"),
+					title = elements[1].split("-");
+
+				title.pop();
+
+				let	date = title[title.length -3]+"/"+title[title.length -2]+"/"+title[title.length -1];
+
+				title.pop();
+				title.pop();
+				title.pop();
+
+				out.title = upCase(title.join(" ").split("_")[0]);
+				out.date = date;
+				out.nature = "newspaper-article";
+				out.newspaper = "lepoint";
+				out.newspaperText = "Le Point";
+			}
+		break;
+
+		case "lejdd.fr":
+			if (path.split("/").length >= 2) {
+				let elements = path.split("/"),
+					title = elements[1].split("-");
+
+				title.pop();
+
+				out.title = upCase(title.join(" "));
+				out.nature = "newspaper-article";
+				out.newspaper = "lejdd";
+				out.newspaperText = "Le JDD";
+			}
+		break;
+
+		case "20minutes.fr":
+			if (path.split("/").length >= 2) {
+				let elements = path.split("/"),
+					title = elements[1].split("-");
+
+				title.shift();
+
+				let d = title.join("").split("");
+				out.date = d[6]+d[7]+"/"+d[4]+d[5]+"/"+d[0]+d[1]+d[2]+d[3];
+
+				title.shift();
+
+				out.title = upCase(title.join(" "));
+				out.nature = "newspaper-article";
+				out.newspaper = "20minutes";
+				out.newspaperText = "20 Minutes";
+			}
+		break;
+
+		case "lefigaro.fr":
+			if (path.split("/").length >= 2) {
+				let elements = path.split("/"),
+					title = elements[elements[0] == "langue-francaise" ? 2 : 1].split("-"),
+					date = title[title.length -1],
+					d = date.split("");
+
+				title.pop();
+
+				out.title = upCase(title.join(" "));
+				out.date = d[6]+d[7]+"/"+d[4]+d[5]+"/"+d[0]+d[1]+d[2]+d[3];
+				out.nature = "newspaper-article";
+				out.newspaper = "lefigaro";
+				out.newspaperText = "Le Figaro";
+			}
+		break;
+
+		case "newyorker.com":
+			if (path.split("/").length >= 3) {
+				let elements = path.split("/"),
+					title = elements[2].split("-");
+
+				out.title = upCase(title.join(" "));
+				out.nature = "newspaper-article";
+				out.newspaper = "thenewyorker";
+				out.newspaperText = "The New Yorker";
+			}
+		break;
 	}
 
 	let TestImgUrl = url.split("?")[0];
@@ -251,5 +448,68 @@ function algo(url) {
 		out.title = noExt+"<span>"+ext+"</span>";
 	}
 
+	if (TestImgUrl.endsWith(".xml")) {
+		out.nature = "xml";
+	}
+
 	return out;
+}
+
+function fancyDate(date) {
+	let d = new Date(date).getTime(),
+		diff = new Date().getTime() - d,
+		day = new Date(date).getDay(),
+		dateInMonth = new Date(date).getDate(),
+		month = new Date(date).getMonth(),
+		year = new Date(date).getFullYear(),
+		out = "";
+
+	day = [
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+		"Sunday"
+	][day];
+
+	month = [
+		"January",
+		"Februar",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December"
+	][month];
+
+	if (diff < 86400000) {
+		if (diff < 3600000) {
+			if (diff < 60000) {
+				out = "Few seconds ago";
+			} else {
+				out = Math.floor(diff/60000)+" minutes ago";
+			}
+		} else {
+			out = Math.floor(diff/3600000)+" hour"+(Math.floor(diff/3600000) > 1 ? "s" : "")+" ago";
+		}
+	} else if (diff < 172800000) {
+		out = "Yesterday";
+	} else if (diff < 604800000) {
+		out = upCase(day);
+	} else {
+		out = day+" "+dateInMonth+" "+month+" "+year;
+	}
+
+	return out;
+}
+
+function fancyLink(url) {
+	return url.split("//")[1].split("/")[0];
 }

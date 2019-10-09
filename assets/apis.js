@@ -1,3 +1,41 @@
+function xmlToJson(xml) {
+	
+	// Create the return object
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+};
+
 function getData(expandedURL, i, cb) {
 	expanded.push(expandedURL);
 
@@ -14,7 +52,6 @@ function getData(expandedURL, i, cb) {
 					expandedURL.author = video.channelTitle;
 					expandedURL.channelUrl = "https://youtube.com/channel/"+video.channelId;
 					expandedURL.date = video.publishedAt;
-
 					display(expandedURL, i);
 				}
 			});
@@ -83,6 +120,45 @@ function getData(expandedURL, i, cb) {
 					if (cb) {
 						cb();
 					}
+				}
+			});
+		break;
+
+		case "xml":
+			$.ajax({
+				url: "https://thme-cors.herokuapp.com/"+expandedURL.url,
+				async: true,
+				success(xml) {
+					xml = xmlToJson(new DOMParser().parseFromString(xml, "text/xml"));
+
+					let channel = xml.rss.channel,
+						itemsCounted = 0;
+
+					expandedURL.title = channel.title["#text"];
+					expandedURL.description = channel.description["#text"];
+					expandedURL.description = channel.description["#text"];
+					expandedURL.img = channel.image.url["#text"];
+					expandedURL.lastModif = channel.lastBuildDate["#text"];
+					expandedURL.items = [];
+
+					channel.item.forEach(function(el) {
+						itemsCounted++;
+
+						if (itemsCounted > 3) {
+							return false;
+						}
+
+						expandedURL.items.push({
+							title: el.title["#text"],
+							description: el.description["#text"],
+							date: el.pubDate["#text"],
+							link: el.link["#text"]
+						});
+					});
+
+					console.log(out);
+
+					display(expandedURL, i);
 				}
 			});
 		break;
