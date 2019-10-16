@@ -1,52 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Playlists / Make lists of links</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="apple-touch-icon-precomposed" href="https://theotime.me/logo.png" />
-	<link rel="shortcut icon" type="image/png" href="../favicon.png">
-	<meta property="og:type" content="website" />
-	<meta property="og:image" content="https://theotime.me/logo.png" />
-	<meta property="og:description" content="Hello! I'm Théotime, a front-end designer and a Javascript developer. I record me also for my podcast where I'm talking about design, web technologies, or developement." />
-	<meta name="description" content="Hello! I'm Théotime, a front-end designer and a Javascript developer. I record me also for my podcast where I'm talking about design, web technologies, or developement." />
-	<meta property="og:site_name" content="Théotime.me">
-	<meta property="og:title" content="Théotime - Designer / Front-end and Javascript developer">
-	<meta property="og:url" content="https://theotime.me" />
-	<meta name="theme-color" content="#33389c">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>your decks - DECK</title>
+    <base href="/assets/">
+    <link rel="stylesheet" href="index/style.css">
 </head>
 <body>
+    <div id="nav">
+        <img class="logo" src="graphics/logo.svg" alt="DECK">
 
-	<!-- Navigation -->
-<div id="nav">
+        <div class="right">
+            <img class="profile load" src="graphics/loader.svg" alt="">
+            <a class="new hidden" onclick="deck.new()"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> New deck</a>
+            <a class="join hidden">JOIN</a>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="intro">
+            <h1>Hi <span></span> !</h1>
+            <h4>This is your <b>latest decks</b>.</h4>
+        </div>
+        <div class="shown"></div>
+        <img class="shownLoader load" src="graphics/loader.svg" alt="">
 
-</div>
+        <div class="others">
+            <h4>All your decks</h4>
+            <div class="title">
+                <span class="name">name</span>
+                <span class="lastModify">last modify</span>
+                <span class="owner">owner</span>
+            </div>
+            <div class="decks" onmousedown="return false"></div>
+        </div>
 
-<div id="wrapper">
-	<div id="playlist">
-		<h4>Chargement ...</h4>
-		<div class="icons-general">
-			<svg width="40" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-		</div>
+        <div class="join">
+            <h4>Join a deck</h4>
+            <input type="url" placeholder="http://deck.rf.gd/id">
+        </div>
+    </div>
 
-		<div class="links"></div>
-	</div>
-</div>
-
-<div id="boxs" align="center">
-	<div id="addPlaylist">
-		<h4>Ajouter une playlist</h4>
-		<input type="text" placeholder="Nom de la playlist">
-	</div>
-</div>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="index/tilt.js"></script>
 	<script src="https://pzm.herokuapp.com/$/ajax|get|cookies|scrolltop|title|getJSON"></script> <!-- Prizm -->
-	<script src="display.js"></script>
-	<script src="save.js"></script>
-	<script src="apis.js"></script>
-	<script src="algo.js"></script>
-	<script src="main.js"></script>
-	<script async src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js'></script>
+    <script src="deck/algo.js"></script>
+    <script src="core/connect.js"></script>
+    <script src="index/main.js"></script>
+    <script src="index/deps.js"></script>
+    <script src="index/display.js"></script>
 </body>
 </html>

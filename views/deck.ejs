@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><%=title%></title>
+	<base href="/assets/">
+	<link rel="stylesheet" href="deck/style.css">
+	<link rel="apple-touch-icon-precomposed" href="https://theotime.me/logo.png" />
+	<link rel="shortcut icon" type="image/png" href="../favicon.png">
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="https://theotime.me/logo.png" />
+	<meta property="og:description" content="Hello! I'm Théotime, a front-end designer and a Javascript developer. I record me also for my podcast where I'm talking about design, web technologies, or developement." />
+	<meta name="description" content="Hello! I'm Théotime, a front-end designer and a Javascript developer. I record me also for my podcast where I'm talking about design, web technologies, or developement." />
+	<meta property="og:site_name" content="Théotime.me">
+	<meta property="og:title" content="Théotime - Designer / Front-end and Javascript developer">
+	<meta property="og:url" content="https://theotime.me" />
+	<meta name="theme-color" content="#33389c">
+</head>
+<body>
+
+	<!-- Navigation -->
+<div id="nav">
+	<img class="logo" src="graphics/logo.svg" alt="DECK">
+
+	<div class="right">
+		<img class="profile load" src="graphics/loader.svg" alt="">
+		<a class="new hidden" onclick="deck.new()"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> New deck</a>
+		<a class="join hidden">JOIN</a>
+	</div>
+</div>
+
+<div id="wrapper">
+	<div id="playlist">
+		<div class="header">
+			<div class="left">
+				<input class="name" type="text">
+				<p class="lastModify">last modification <b></b></p>
+			</div>
+
+			<div class="access">
+				<svg viewBox="0 0 24 24"><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
+				<span>Loading</span>
+			</div>
+		</div>
+
+		<div class="newLink">
+			<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+			<input type="text" placeholder="loading deck ...">
+		</div>
+
+		<div class="links hidden"></div>
+	</div>
+</div>
+
+<div id="boxs" align="center">
+	<div id="addPlaylist">
+		<h4>Ajouter une playlist</h4>
+		<input type="text" placeholder="Nom de la playlist">
+	</div>
+</div>
+
+
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+	<script defer src="https://pzm.herokuapp.com/$/ajax|get|cookies|scrolltop|title|getJSON"></script> <!-- Prizm -->
+	<script defer src="core/connect.js"></script>
+	<script defer src="deck/display.js"></script>
+	<script defer src="deck/save.js"></script>
+	<script defer src="deck/apis.js"></script>
+	<script defer src="deck/algo.js"></script>
+	<script defer src="deck/main.js"></script>
+	<script defer src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js'></script>
+</body>
+</html>
