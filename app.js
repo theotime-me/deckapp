@@ -273,6 +273,7 @@ function getState(socket) {
 }
 
 server.listen(process.env.PORT || 80);
+console.log("DECKAPP ENGINE v1.0 - starting");
 
 function checkUser(socket, cb) {
 	let id = socket.uid;
