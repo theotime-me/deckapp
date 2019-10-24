@@ -2,7 +2,7 @@
   "name": "deckapp",
   "version": "1.0.0",
   "description": "playlists",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "build": "node app.js"
