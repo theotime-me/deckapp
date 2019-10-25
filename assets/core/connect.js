@@ -1,4 +1,4 @@
-var socket = io.connect("localhost"),
+var socket = io(),
     uid = $.getCookie("DKID") || false;
 
 if (uid) {
