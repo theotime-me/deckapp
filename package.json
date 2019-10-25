@@ -4,8 +4,7 @@
   "description": "playlists",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "build": "node app.js"
+    "start": "node app.js"
   },
   "author": "theotime.me",
   "license": "MIT",
